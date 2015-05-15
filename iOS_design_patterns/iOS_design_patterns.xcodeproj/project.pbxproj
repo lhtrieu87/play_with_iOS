@@ -13,6 +13,8 @@
 		CD77C08B1B06487E00ED49AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD77C08A1B06487E00ED49AF /* Images.xcassets */; };
 		CD77C08E1B06487E00ED49AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD77C08C1B06487E00ED49AF /* LaunchScreen.xib */; };
 		CD77C09A1B06487E00ED49AF /* iOS_design_patternsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0991B06487E00ED49AF /* iOS_design_patternsTests.swift */; };
+		CD77C0A51B064C0C00ED49AF /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0A41B064C0C00ED49AF /* Album.swift */; };
+		CD77C0A81B064D4200ED49AF /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0A71B064D4200ED49AF /* AlbumView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		CD77C0931B06487E00ED49AF /* iOS_design_patternsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_design_patternsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD77C0981B06487E00ED49AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD77C0991B06487E00ED49AF /* iOS_design_patternsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_design_patternsTests.swift; sourceTree = "<group>"; };
+		CD77C0A41B064C0C00ED49AF /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		CD77C0A71B064D4200ED49AF /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 		CD77C0801B06487E00ED49AF /* iOS_design_patterns */ = {
 			isa = PBXGroup;
 			children = (
+				CD77C0A61B064D3100ED49AF /* views */,
+				CD77C0A31B064B7D00ED49AF /* models */,
 				CD77C0831B06487E00ED49AF /* AppDelegate.swift */,
 				CD77C0851B06487E00ED49AF /* ViewController.swift */,
 				CD77C0871B06487E00ED49AF /* Main.storyboard */,
@@ -110,6 +116,22 @@
 				CD77C0981B06487E00ED49AF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD77C0A31B064B7D00ED49AF /* models */ = {
+			isa = PBXGroup;
+			children = (
+				CD77C0A41B064C0C00ED49AF /* Album.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		CD77C0A61B064D3100ED49AF /* views */ = {
+			isa = PBXGroup;
+			children = (
+				CD77C0A71B064D4200ED49AF /* AlbumView.swift */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +236,8 @@
 			files = (
 				CD77C0861B06487E00ED49AF /* ViewController.swift in Sources */,
 				CD77C0841B06487E00ED49AF /* AppDelegate.swift in Sources */,
+				CD77C0A81B064D4200ED49AF /* AlbumView.swift in Sources */,
+				CD77C0A51B064C0C00ED49AF /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
