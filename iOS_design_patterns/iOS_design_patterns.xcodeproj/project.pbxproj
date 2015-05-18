@@ -15,6 +15,9 @@
 		CD77C09A1B06487E00ED49AF /* iOS_design_patternsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0991B06487E00ED49AF /* iOS_design_patternsTests.swift */; };
 		CD77C0A51B064C0C00ED49AF /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0A41B064C0C00ED49AF /* Album.swift */; };
 		CD77C0A81B064D4200ED49AF /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0A71B064D4200ED49AF /* AlbumView.swift */; };
+		CD7F05651B078FBE00B0CE7C /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F05641B078FBE00B0CE7C /* LibraryAPI.swift */; };
+		CD7F05671B07935200B0CE7C /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F05661B07935200B0CE7C /* PersistencyManager.swift */; };
+		CD7F05691B079CEF00B0CE7C /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F05681B079CEF00B0CE7C /* HttpClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,9 @@
 		CD77C0991B06487E00ED49AF /* iOS_design_patternsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_design_patternsTests.swift; sourceTree = "<group>"; };
 		CD77C0A41B064C0C00ED49AF /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		CD77C0A71B064D4200ED49AF /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
+		CD7F05641B078FBE00B0CE7C /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
+		CD7F05661B07935200B0CE7C /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
+		CD7F05681B079CEF00B0CE7C /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		CD77C0801B06487E00ED49AF /* iOS_design_patterns */ = {
 			isa = PBXGroup;
 			children = (
+				CD7F05631B078F7700B0CE7C /* api */,
 				CD77C0A61B064D3100ED49AF /* views */,
 				CD77C0A31B064B7D00ED49AF /* models */,
 				CD77C0831B06487E00ED49AF /* AppDelegate.swift */,
@@ -132,6 +139,16 @@
 				CD77C0A71B064D4200ED49AF /* AlbumView.swift */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		CD7F05631B078F7700B0CE7C /* api */ = {
+			isa = PBXGroup;
+			children = (
+				CD7F05641B078FBE00B0CE7C /* LibraryAPI.swift */,
+				CD7F05661B07935200B0CE7C /* PersistencyManager.swift */,
+				CD7F05681B079CEF00B0CE7C /* HttpClient.swift */,
+			);
+			name = api;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +252,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD77C0861B06487E00ED49AF /* ViewController.swift in Sources */,
+				CD7F05671B07935200B0CE7C /* PersistencyManager.swift in Sources */,
+				CD7F05651B078FBE00B0CE7C /* LibraryAPI.swift in Sources */,
 				CD77C0841B06487E00ED49AF /* AppDelegate.swift in Sources */,
+				CD7F05691B079CEF00B0CE7C /* HttpClient.swift in Sources */,
 				CD77C0A81B064D4200ED49AF /* AlbumView.swift in Sources */,
 				CD77C0A51B064C0C00ED49AF /* Album.swift in Sources */,
 			);
@@ -433,6 +453,7 @@
 				CD77C09F1B06487E00ED49AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD77C0A01B06487E00ED49AF /* Build configuration list for PBXNativeTarget "iOS_design_patternsTests" */ = {
 			isa = XCConfigurationList;
@@ -441,6 +462,7 @@
 				CD77C0A21B06487E00ED49AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
