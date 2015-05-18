@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD7293F51B0A34B400D944C1 /* Album+TableRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7293F41B0A34B400D944C1 /* Album+TableRepresentation.swift */; };
 		CD77C0841B06487E00ED49AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0831B06487E00ED49AF /* AppDelegate.swift */; };
 		CD77C0861B06487E00ED49AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0851B06487E00ED49AF /* ViewController.swift */; };
 		CD77C0891B06487E00ED49AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD77C0871B06487E00ED49AF /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD7293F41B0A34B400D944C1 /* Album+TableRepresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Album+TableRepresentation.swift"; sourceTree = "<group>"; };
 		CD77C07E1B06487E00ED49AF /* iOS_design_patterns.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_design_patterns.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD77C0821B06487E00ED49AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD77C0831B06487E00ED49AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				CD77C0A41B064C0C00ED49AF /* Album.swift */,
+				CD7293F41B0A34B400D944C1 /* Album+TableRepresentation.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD77C0861B06487E00ED49AF /* ViewController.swift in Sources */,
+				CD7293F51B0A34B400D944C1 /* Album+TableRepresentation.swift in Sources */,
 				CD7F05671B07935200B0CE7C /* PersistencyManager.swift in Sources */,
 				CD7F05651B078FBE00B0CE7C /* LibraryAPI.swift in Sources */,
 				CD77C0841B06487E00ED49AF /* AppDelegate.swift in Sources */,
