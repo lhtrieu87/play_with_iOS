@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD7293F51B0A34B400D944C1 /* Album+TableRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7293F41B0A34B400D944C1 /* Album+TableRepresentation.swift */; };
+		CD7293F71B0A450B00D944C1 /* HorizontalScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7293F61B0A450B00D944C1 /* HorizontalScroller.swift */; };
 		CD77C0841B06487E00ED49AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0831B06487E00ED49AF /* AppDelegate.swift */; };
 		CD77C0861B06487E00ED49AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD77C0851B06487E00ED49AF /* ViewController.swift */; };
 		CD77C0891B06487E00ED49AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD77C0871B06487E00ED49AF /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		CD7293F41B0A34B400D944C1 /* Album+TableRepresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Album+TableRepresentation.swift"; sourceTree = "<group>"; };
+		CD7293F61B0A450B00D944C1 /* HorizontalScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalScroller.swift; sourceTree = "<group>"; };
 		CD77C07E1B06487E00ED49AF /* iOS_design_patterns.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_design_patterns.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD77C0821B06487E00ED49AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD77C0831B06487E00ED49AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				CD77C0A71B064D4200ED49AF /* AlbumView.swift */,
+				CD7293F61B0A450B00D944C1 /* HorizontalScroller.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				CD7293F51B0A34B400D944C1 /* Album+TableRepresentation.swift in Sources */,
 				CD7F05671B07935200B0CE7C /* PersistencyManager.swift in Sources */,
 				CD7F05651B078FBE00B0CE7C /* LibraryAPI.swift in Sources */,
+				CD7293F71B0A450B00D944C1 /* HorizontalScroller.swift in Sources */,
 				CD77C0841B06487E00ED49AF /* AppDelegate.swift in Sources */,
 				CD7F05691B079CEF00B0CE7C /* HttpClient.swift in Sources */,
 				CD77C0A81B064D4200ED49AF /* AlbumView.swift in Sources */,

@@ -8,24 +8,29 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HorizontalScrollerDelegate {
     private var table: UITableView?
     private var allAlbums: [Album] = [Album]()
     private var currentAlbum: [String: [String]]?
     private var currentAlbumIndex: Int = 0
+    private var scroller: HorizontalScroller?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(red: 0.76, green: 0.81, blue: 0.87, alpha: 1)
         
-        self.allAlbums = LibraryAPI.sharedInstance.getAlbums()
-        
         self.table = UITableView(frame: CGRectMake(0, 120, self.view.frame.size.width, self.view.frame.size.height - 120), style: UITableViewStyle.Grouped)
         self.table!.delegate = self
         self.table!.dataSource = self
         self.table!.backgroundColor = nil
         self.view.addSubview(self.table!)
+        
+        self.scroller = HorizontalScroller(frame: CGRectMake(0, 0, self.view.frame.width, 120), delegate: self)
+        self.scroller!.backgroundColor = UIColor(red: 0.24, green: 0.35, blue: 0.49, alpha: 1.0)
+        self.view.addSubview(self.scroller!)
+        
+        self.reloadScroller()
         
         self.showDataForAlbumAt(0)
     }
@@ -63,6 +68,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell!.detailTextLabel!.text = self.currentAlbum!["values"]![row]
         
         return cell!
+    }
+    
+    func reloadScroller() {
+        self.allAlbums = LibraryAPI.sharedInstance.getAlbums()
+        
+        if self.currentAlbumIndex < 0 {
+            self.currentAlbumIndex = 0
+        }
+        
+        if self.currentAlbumIndex >= self.allAlbums.count {
+            self.currentAlbumIndex = self.allAlbums.count - 1
+        }
+        
+        self.scroller!.reloadData()
+        self.showDataForAlbumAt(self.currentAlbumIndex)
+    }
+    
+    // MARK: HorizontalScrollerDelegate's methods
+    func horizontalScroller(horizontalScroller: HorizontalScroller, clickedViewAtIndex index: Int) {
+        self.showDataForAlbumAt(index)
+    }
+    
+    func horizontalScroller(horizontalScroller: HorizontalScroller, viewAtIndex index: Int) -> UIView {
+        let album = self.allAlbums[index]
+        return AlbumView(frame: CGRectMake(0, 0, 100, 100), albumCover: album.coverUrl)
+    }
+    
+    func numberOfViewsForHorizontalScroller(horizontalScroller: HorizontalScroller) -> Int {
+        return self.allAlbums.count
+    }
+    
+    func initialViewIndexForhorizontalScroller(horizontalScroller: HorizontalScroller) -> Int {
+        return 1
     }
 }
 
