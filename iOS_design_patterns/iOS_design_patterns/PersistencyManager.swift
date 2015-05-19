@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PersistencyManager: NSObject {
     private var albums: [Album]
@@ -39,5 +40,26 @@ class PersistencyManager: NSObject {
         if index >= 0 && index < self.albums.count {
             self.albums.removeAtIndex(index)
         }
+    }
+    
+    func saveImage(image: UIImage, fileName: String) {
+        let path: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
+        let filePath = path.stringByAppendingPathComponent(fileName)
+        
+        UIImagePNGRepresentation(image).writeToFile(filePath, atomically: true)
+    }
+    
+    func getImage(fileName: String) -> UIImage? {
+        let path: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
+        let filePath = path.stringByAppendingPathComponent(fileName)
+        
+        var readError : NSError?
+        if let data: NSData = NSData(contentsOfFile: filePath, options: .DataReadingMappedIfSafe, error: &readError) {
+            if readError == nil {
+                return UIImage(data: data)
+            }
+        }
+        
+        return nil
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HttpClient: NSObject {
     func postRequest(url: String, data: [String: AnyObject?]) {
@@ -15,5 +16,15 @@ class HttpClient: NSObject {
     
     func deleteRequest(url: String, data: [String: AnyObject?]) {
         
+    }
+    
+    func downloadImage(url: String) -> UIImage? {
+        if let data: NSData = NSData(contentsOfURL: NSURL(string: url)!) {
+            if let image = UIImage(data: data) {
+                return image
+            }
+        }
+        
+        return nil
     }
 }

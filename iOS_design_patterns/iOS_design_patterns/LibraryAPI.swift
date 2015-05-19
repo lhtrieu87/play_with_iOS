@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class LibraryAPI: NSObject {
     static let sharedInstance = LibraryAPI()
@@ -21,6 +22,30 @@ class LibraryAPI: NSObject {
         self.isOnline = false
         
         super.init()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "downloadImage:", name: "BLDownloadImageNotification", object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func downloadImage(notification: NSNotification) {
+        let imageView = notification.userInfo!["imageView"] as! UIImageView
+        let coverUrl = notification.userInfo!["coverUrl"] as! String
+        
+        imageView.image = persistencyManager.getImage(coverUrl.lastPathComponent)
+        
+        if imageView.image == nil {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                if let image: UIImage = self.httpClient.downloadImage(coverUrl) {
+                    dispatch_sync(dispatch_get_main_queue(), {
+                        imageView.image = image
+                        self.persistencyManager.saveImage(image, fileName: coverUrl.lastPathComponent)
+                    })
+                }
+            })
+        }
     }
     
     func getAlbums() -> [Album] {
