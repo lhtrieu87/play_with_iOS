@@ -60,6 +60,10 @@ class LibraryAPI: NSObject {
         }
     }
     
+    func saveAlbums() {
+        self.persistencyManager.saveAlbums()
+    }
+    
     func deleteAlbum(index: Int) {
         self.persistencyManager.deleteAlbum(index)
         

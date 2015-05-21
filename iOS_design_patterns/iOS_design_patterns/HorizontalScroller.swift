@@ -77,7 +77,10 @@ class HorizontalScroller: UIView, UIScrollViewDelegate {
         self.scroller.contentSize = CGSizeMake(xVal + HorizontalScroller.VIEWS_OFFSET, self.frame.size.height)
         
         if let initialView = self.delegate.initialViewIndexForhorizontalScroller?(self) {
-            self.scroller.setContentOffset(CGPointMake(CGFloat(initialView) * (HorizontalScroller.VIEW_DIMENSIONS + 2 * HorizontalScroller.VIEW_PADDING), 0), animated: true)
+            if initialView >= 0 && initialView < self.scroller.subviews.count {
+                let view: UIView = self.scroller.subviews[initialView] as! UIView
+                self.scroller.setContentOffset(CGPointMake(view.frame.origin.x - self.frame.size.width / 2 + view.frame.size.width / 2, 0), animated:true)
+            }
         }
     }
     

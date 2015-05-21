@@ -20,6 +20,7 @@
 		CD7F05651B078FBE00B0CE7C /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F05641B078FBE00B0CE7C /* LibraryAPI.swift */; };
 		CD7F05671B07935200B0CE7C /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F05661B07935200B0CE7C /* PersistencyManager.swift */; };
 		CD7F05691B079CEF00B0CE7C /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F05681B079CEF00B0CE7C /* HttpClient.swift */; };
+		CDD1C55F1B0D4BF500B25DEB /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD1C55E1B0D4BF500B25DEB /* Command.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		CD7F05641B078FBE00B0CE7C /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
 		CD7F05661B07935200B0CE7C /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		CD7F05681B079CEF00B0CE7C /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		CDD1C55E1B0D4BF500B25DEB /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		CD77C0801B06487E00ED49AF /* iOS_design_patterns */ = {
 			isa = PBXGroup;
 			children = (
+				CDD1C55D1B0D4BE000B25DEB /* core */,
 				CD7F05631B078F7700B0CE7C /* api */,
 				CD77C0A61B064D3100ED49AF /* views */,
 				CD77C0A31B064B7D00ED49AF /* models */,
@@ -155,6 +158,14 @@
 				CD7F05681B079CEF00B0CE7C /* HttpClient.swift */,
 			);
 			name = api;
+			sourceTree = "<group>";
+		};
+		CDD1C55D1B0D4BE000B25DEB /* core */ = {
+			isa = PBXGroup;
+			children = (
+				CDD1C55E1B0D4BF500B25DEB /* Command.swift */,
+			);
+			name = core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 				CD77C0861B06487E00ED49AF /* ViewController.swift in Sources */,
 				CD7293F51B0A34B400D944C1 /* Album+TableRepresentation.swift in Sources */,
 				CD7F05671B07935200B0CE7C /* PersistencyManager.swift in Sources */,
+				CDD1C55F1B0D4BF500B25DEB /* Command.swift in Sources */,
 				CD7F05651B078FBE00B0CE7C /* LibraryAPI.swift in Sources */,
 				CD7293F71B0A450B00D944C1 /* HorizontalScroller.swift in Sources */,
 				CD77C0841B06487E00ED49AF /* AppDelegate.swift in Sources */,

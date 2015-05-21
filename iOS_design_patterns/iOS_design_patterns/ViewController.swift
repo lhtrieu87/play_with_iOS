@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HorizontalScrollerDelegate {
     private var table: UITableView?
@@ -14,6 +15,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     private var currentAlbum: [String: [String]]?
     private var currentAlbumIndex: Int = 0
     private var scroller: HorizontalScroller?
+    private var toolbar: UIToolbar?
+    private var undoStack: [Command] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,48 +29,92 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.table!.backgroundColor = nil
         self.view.addSubview(self.table!)
         
+        self.loadPreviousState()
+        
         self.scroller = HorizontalScroller(frame: CGRectMake(0, 0, self.view.frame.width, 120), delegate: self)
         self.scroller!.backgroundColor = UIColor(red: 0.24, green: 0.35, blue: 0.49, alpha: 1.0)
-        self.view.addSubview(self.scroller!)
         
         self.reloadScroller()
+        self.view.addSubview(self.scroller!)
         
-        self.showDataForAlbumAt(0)
+        self.showDataForAlbumAt(self.currentAlbumIndex)
+        
+        self.toolbar = UIToolbar()
+        let undoItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Undo, target: self, action: "undoAction")
+        undoItem.enabled = false
+        let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let delete = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: "deleteAlbum")
+        if self.allAlbums.count <= 0 {
+            delete.enabled = false
+        }
+        self.toolbar!.setItems([undoItem, space, delete], animated: true)
+        self.view.addSubview(self.toolbar!)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveCurrentState", name: UIApplicationDidEnterBackgroundNotification, object: nil)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        self.toolbar!.frame = CGRectMake(0, self.view.frame.height - 44, self.view.frame.width, 44)
+        self.table!.frame = CGRectMake(0, 130, self.view.frame.width, self.view.frame.height - 200)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    func showDataForAlbumAt(index: Int) {
-        if index < self.allAlbums.count {
-            currentAlbum = self.allAlbums[index].tr_tableRepresentation()
-            currentAlbumIndex = index
-        } else {
-            currentAlbum = nil
-        }
+    
+    func addAlbum(album: Album, index: Int) {
+        LibraryAPI.sharedInstance.addAlbum(album, index: index)
+        self.currentAlbumIndex = index
+        self.reloadScroller()
         
-        self.table!.reloadData()
+        if LibraryAPI.sharedInstance.getAlbums().count > 0 {
+            var deleteItem: UIBarButtonItem = self.toolbar!.items![2] as! UIBarButtonItem
+            deleteItem.enabled = true
+        }
     }
     
-    // MARK: table's data source & delegate
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentAlbum!["titles"]!.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell? = table!.dequeueReusableCellWithIdentifier("cell") as? UITableViewCell
-        
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "cell")
+    func deleteAlbum() {
+        if self.currentAlbumIndex < 0 || self.currentAlbumIndex >= self.allAlbums.count {
+            return
         }
         
-        let row = indexPath.row
-        cell!.textLabel!.text = self.currentAlbum!["titles"]![row]
-        cell!.detailTextLabel!.text = self.currentAlbum!["values"]![row]
+        let deletedAlbum = self.allAlbums[self.currentAlbumIndex]
+        let deletedAlbumIndex = self.currentAlbumIndex
         
-        return cell!
+        let undoCommand = Command(target: self, f: {
+            (args) in
+            self.addAlbum(deletedAlbum, index: deletedAlbumIndex)
+            return nil
+        }, args: [deletedAlbum, deletedAlbumIndex])
+        
+        self.undoStack.append(undoCommand)
+        var undoItem: UIBarButtonItem = self.toolbar!.items![0] as! UIBarButtonItem
+        undoItem.enabled = true
+        
+        LibraryAPI.sharedInstance.deleteAlbum(self.currentAlbumIndex)
+        self.reloadScroller()
+        
+        if LibraryAPI.sharedInstance.getAlbums().count <= 0 {
+            var deleteItem: UIBarButtonItem = self.toolbar!.items![2] as! UIBarButtonItem
+            deleteItem.enabled = false
+        }
+    }
+    
+    func undoAction() {
+        if self.undoStack.count > 0 {
+            let undoCommand = self.undoStack.removeLast()
+            undoCommand.execute(nil)
+        }
+        
+        if self.undoStack.count == 0 {
+            var undoItem: UIBarButtonItem = self.toolbar!.items![0] as! UIBarButtonItem
+            undoItem.enabled = false
+        }
     }
     
     func reloadScroller() {
@@ -85,6 +132,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.showDataForAlbumAt(self.currentAlbumIndex)
     }
     
+    // MARK: table's data source & delegate
+    func showDataForAlbumAt(index: Int) {
+        if index >= 0 && index < self.allAlbums.count {
+            currentAlbum = self.allAlbums[index].tr_tableRepresentation()
+            currentAlbumIndex = index
+        } else {
+            currentAlbum = nil
+        }
+        
+        self.table!.reloadData()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.currentAlbum != nil {
+            return currentAlbum!["titles"]!.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: UITableViewCell? = table!.dequeueReusableCellWithIdentifier("cell") as? UITableViewCell
+        
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "cell")
+        }
+        
+        let row = indexPath.row
+        cell!.textLabel!.text = self.currentAlbum!["titles"]![row]
+        cell!.detailTextLabel!.text = self.currentAlbum!["values"]![row]
+        
+        return cell!
+    }
+    
     // MARK: HorizontalScrollerDelegate's methods
     func horizontalScroller(horizontalScroller: HorizontalScroller, clickedViewAtIndex index: Int) {
         self.showDataForAlbumAt(index)
@@ -100,7 +181,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func initialViewIndexForhorizontalScroller(horizontalScroller: HorizontalScroller) -> Int {
-        return 1
+        return self.currentAlbumIndex
+    }
+    
+    // MARK: Memento
+    func saveCurrentState() {
+        NSUserDefaults.standardUserDefaults().setInteger(self.currentAlbumIndex, forKey: "currentAlbumIndex")
+        LibraryAPI.sharedInstance.saveAlbums()
+    }
+    
+    func loadPreviousState() {
+        self.currentAlbumIndex = NSUserDefaults.standardUserDefaults().integerForKey("currentAlbumIndex")
     }
 }
 
